@@ -25,11 +25,9 @@ jobs:
 
       - name: Install
         run: npm ci
-        working-directory: static-web
 
       - name: Build
         run: npm run build --if-present
-        working-directory: static-web
 
       - name: Connect to AWS
         uses: aws-actions/configure-aws-credentials@v4
@@ -40,4 +38,3 @@ jobs:
 
       - name: Update static web files
         run: aws s3 cp build/ s3://${{ secrets.BUCKET_NAME }} --recursive
-        working-directory: static-web
