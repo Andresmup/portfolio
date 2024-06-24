@@ -37,4 +37,4 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update static web files
-        run: aws s3 cp build/ s3://${{ secrets.BUCKET_NAME }} --recursive"
+        run: aws s3 cp build/ s3://${{ secrets.BUCKET_NAME }} --recursive
