@@ -24,6 +24,7 @@ jobs:
           node-version: '20.x'
       
       - name: Clean install
+        run: realpath .
         run: npm ci
 
       - name: Build
