@@ -1,0 +1,40 @@
+name: Build and deploy static web content in S3 
+on:
+  push:
+    branches:
+      - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: CD into static-web folder
+      - run: cd static-web
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      
+      - name: Clean install
+      - run: npm ci
+
+      - name: Build
+      - run: npm run build --if-present
+
+      - name: Connect to AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-session-name: aws-push-lambda-session
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Update static web files
+        run: aws s3 cp build/ s3://${{ secrets.BUCKET_NAME }} --recursive"
