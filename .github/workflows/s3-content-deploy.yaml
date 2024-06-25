@@ -41,3 +41,6 @@ jobs:
       - name: Update static web files
         run: aws s3 cp build/ s3://${{ secrets.BUCKET_NAME }} --recursive
         working-directory: static-web
+
+      - name: Ivalidate Cloudfront distribution
+        run: aws s3 cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }}
