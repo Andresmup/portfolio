@@ -43,4 +43,4 @@ jobs:
         working-directory: static-web
 
       - name: Ivalidate Cloudfront distribution
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }}
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }}  --paths "/*"
