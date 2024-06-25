@@ -31,7 +31,7 @@ export const Blog = <Icon icon="mdi:linkedin" />;
   Add a second paragraph for the about me section.
 */
 export const moreInfo =
-  "Status = 'Using data on the cloud'";
+  "Status = 'Using data on the AWS cloud, updated from Github Actions'";
 
 /* Skills
  ************************************************************** 
